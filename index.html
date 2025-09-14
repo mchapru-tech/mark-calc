@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This file is a duplicate and will be deleted -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ...existing code... -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="socket-client.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Game Mark Calculator</h2>
+        <div id="loginSection">
+            <form id="loginForm" style="text-align:center; margin-bottom:20px;">
+                <label for="role">Login as:</label>
+                <select id="role" name="role">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                <input type="password" id="adminPass" name="adminPass" placeholder="Admin password" style="display:none; margin-left:10px;" />
+                <button type="submit" class="add-btn" style="float:none;">Login</button>
+            </form>
+        </div>
+        <div id="mainSection" style="display:none;">
+            <!-- User Navigation Bar -->
+            <nav id="userNav" style="display:none; margin-bottom:20px; text-align:center;">
+                <button type="button" class="nav-btn" data-nav="overall">Overall</button>
+                <button type="button" class="nav-btn" data-nav="Kids">Kids</button>
+                <button type="button" class="nav-btn" data-nav="Sub Junior">Sub Junior</button>
+                <button type="button" class="nav-btn" data-nav="Junior">Junior</button>
+                <button type="button" class="nav-btn" data-nav="Senior">Senior</button>
+            </nav>
+            <div id="leaderboard" class="leaderboard" style="display:none;"></div>
+            <form id="gamesForm" autocomplete="off">
+                <div id="categoryTables">
+                    <div class="category-section" id="kidsSection" style="display:none;">
+                        <h3>Kids</h3>
+                        <table class="games-table" id="kidsTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Game</th>
+                                    <th>Team A</th>
+                                    <th>Team B</th>
+                                    <th class="admin-only">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kidsTableBody"></tbody>
+                            <tfoot>
+                                <tr class="admin-only" id="addKidsRow">
+                                    <td colspan="5" style="text-align:center; background:#f0f6ff;">
+                                        <button type="button" id="addKidsBtn" class="add-btn">+ Add Game</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="category-section" id="subjuniorSection" style="display:none;">
+                        <h3>Sub Junior</h3>
+                        <table class="games-table" id="subjuniorTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Game</th>
+                                    <th>Team A</th>
+                                    <th>Team B</th>
+                                    <th class="admin-only">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody id="subjuniorTableBody"></tbody>
+                            <tfoot>
+                                <tr class="admin-only" id="addSubJuniorRow">
+                                    <td colspan="5" style="text-align:center; background:#f0f6ff;">
+                                        <button type="button" id="addSubJuniorBtn" class="add-btn">+ Add Game</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="category-section" id="juniorSection" style="display:none;">
+                        <h3>Junior</h3>
+                        <table class="games-table" id="juniorTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Game</th>
+                                    <th>Team A</th>
+                                    <th>Team B</th>
+                                    <th class="admin-only">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody id="juniorTableBody"></tbody>
+                            <tfoot>
+                                <tr class="admin-only" id="addJuniorRow">
+                                    <td colspan="5" style="text-align:center; background:#f0f6ff;">
+                                        <button type="button" id="addJuniorBtn" class="add-btn">+ Add Game</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="category-section" id="seniorSection" style="display:none;">
+                        <h3>Senior</h3>
+                        <table class="games-table" id="seniorTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Game</th>
+                                    <th>Team A</th>
+                                    <th>Team B</th>
+                                    <th class="admin-only">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody id="seniorTableBody"></tbody>
+                            <tfoot>
+                                <tr class="admin-only" id="addSeniorRow">
+                                    <td colspan="5" style="text-align:center; background:#f0f6ff;">
+                                        <button type="button" id="addSeniorBtn" class="add-btn">+ Add Game</button>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </form>
+            <table class="totals-table" id="categoryTable" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Team A Total</th>
+                        <th>Team B Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Kids</td><td id="kidsA">0</td><td id="kidsB">0</td></tr>
+                    <tr><td>Sub Junior</td><td id="subjuniorA">0</td><td id="subjuniorB">0</td></tr>
+                    <tr><td>Junior</td><td id="juniorA">0</td><td id="juniorB">0</td></tr>
+                    <tr><td>Senior</td><td id="seniorA">0</td><td id="seniorB">0</td></tr>
+                    <tr style="font-weight:bold; background:#e6f7ff;"><td>Overall Total</td><td id="overallA">0</td><td id="overallB">0</td></tr>
+                </tbody>
+            </table>
+            <div class="admin-only" style="text-align:center; margin-top:20px;">
+                <button type="button" id="uploadBtn" class="add-btn">Upload & Save</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
