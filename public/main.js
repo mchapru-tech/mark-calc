@@ -23,8 +23,24 @@ function updateCalculations() {
 		overallB += sumB;
 	});
 	document.getElementById('overallA').textContent = overallA;
-	document.getElementById('overallB').textContent = overallB;
+document.getElementById('overallB').textContent = overallB;
+
+// ✅ New: Show who is leading
+const statusEl = document.getElementById('leaderStatus');
+if (statusEl) {
+    if (overallA > overallB) {
+        statusEl.textContent = `🏆 Team A is leading by ${overallA - overallB} points!`;
+        statusEl.style.color = "#6a82fb"; // Team A color
+    } else if (overallB > overallA) {
+        statusEl.textContent = `🏆 Team B is leading by ${overallB - overallA} points!`;
+        statusEl.style.color = "#fc5c7d"; // Team B color
+    } else {
+        statusEl.textContent = `⚖️ It's a tie! Both teams have ${overallA} points.`;
+        statusEl.style.color = "#ffe066"; // Tie color
+    }
 }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
 	setupLogin();
 	setupTableEvents();
@@ -129,18 +145,31 @@ function setupUserNav() {
 
 function setRoleUI() {
 	const isAdmin = currentRole === 'admin';
+
+	// Toggle admin-only elements
 	document.querySelectorAll('.admin-only').forEach(el => {
 		el.style.display = isAdmin ? '' : 'none';
 	});
+
+	// Toggle input fields' readOnly property
+	const allInputs = document.querySelectorAll('input[name="teamA"], input[name="teamB"], input[name="gameName"]');
+	allInputs.forEach(input => {
+		input.readOnly = !isAdmin;
+		input.style.backgroundColor = isAdmin ? '#232946' : '#1a1b22';
+		input.style.cursor = isAdmin ? 'text' : 'not-allowed';
+	});
+
 	const nav = document.getElementById('userNav');
 	const leaderboard = document.getElementById('leaderboard');
 	const categoryTable = document.getElementById('categoryTable');
+
 	const sectionIds = {
 		'Kids': 'kidsSection',
 		'Sub Junior': 'subjuniorSection',
 		'Junior': 'juniorSection',
 		'Senior': 'seniorSection'
 	};
+
 	if (!isAdmin) {
 		if (nav) nav.style.display = '';
 		if (leaderboard) leaderboard.style.display = '';
@@ -159,7 +188,6 @@ function setRoleUI() {
 		});
 	}
 }
-
 function createGameRow(gameId = null, gameName = '', teamA = '', teamB = '', sn = 1) {
 	const id = gameId !== null ? gameId : `game${gameCount++}`;
 	return `<tr id="${id}">
@@ -192,26 +220,35 @@ function updateSerialNumbers(category) {
 }
 
 function setupTableEvents() {
-	document.getElementById('addKidsBtn').addEventListener('click', function() { addGameRowToCategory('Kids'); });
-	document.getElementById('addSubJuniorBtn').addEventListener('click', function() { addGameRowToCategory('Sub Junior'); });
-	document.getElementById('addJuniorBtn').addEventListener('click', function() { addGameRowToCategory('Junior'); });
-	document.getElementById('addSeniorBtn').addEventListener('click', function() { addGameRowToCategory('Senior'); });
-	categories.forEach(cat => {
-		const tbody = document.getElementById(tableIds[cat]);
-		tbody.addEventListener('input', function() { updateCalculations(); updateSerialNumbers(cat); });
-		tbody.addEventListener('click', function(e) {
-			if (e.target.classList.contains('removeBtn')) {
-				e.target.closest('tr').remove();
-				updateSerialNumbers(cat);
-				updateCalculations();
-			}
-		});
-	});
-	// Upload button logic
-	const uploadBtn = document.getElementById('uploadBtn');
-	if (uploadBtn) {
-		uploadBtn.addEventListener('click', saveAllTablesToStorage);
-	}
+    document.getElementById('addKidsBtn').addEventListener('click', function() { addGameRowToCategory('Kids'); });
+    document.getElementById('addSubJuniorBtn').addEventListener('click', function() { addGameRowToCategory('Sub Junior'); });
+    document.getElementById('addJuniorBtn').addEventListener('click', function() { addGameRowToCategory('Junior'); });
+    document.getElementById('addSeniorBtn').addEventListener('click', function() { addGameRowToCategory('Senior'); });
+    
+    categories.forEach(cat => {
+        const tbody = document.getElementById(tableIds[cat]);
+        
+        // Input events (admins only, since users can't type)
+        tbody.addEventListener('input', function() {
+            updateCalculations();
+            updateSerialNumbers(cat);
+        });
+
+        // Remove button logic
+        tbody.addEventListener('click', function(e) {
+            if (e.target.classList.contains('removeBtn')) {
+                e.target.closest('tr').remove();
+                updateSerialNumbers(cat);
+                updateCalculations();
+            }
+        });
+    });
+
+    // Upload button logic
+    const uploadBtn = document.getElementById('uploadBtn');
+    if (uploadBtn) {
+        uploadBtn.addEventListener('click', saveAllTablesToStorage);
+    }
 }
 
 function saveAllTablesToStorage() {
