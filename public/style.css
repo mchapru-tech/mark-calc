@@ -257,3 +257,24 @@ input[type="number"]:focus, input[type="text"]:focus, select:focus {
 @media (max-width: 900px) {
   .container { padding: 10px; }
 }
+.leader-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  margin-top: 10px;
+}
+
+.team-a-badge { background: #6a82fb; color: white; }
+.team-b-badge { background: #fc5c7d; color: white; }
+.tie-badge   { background: #ffe066; color: #232946; }
+
+.leading-cell {
+  animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+  from { box-shadow: 0 0 8px rgba(255, 224, 102, 0.6); }
+  to   { box-shadow: 0 0 18px rgba(255, 224, 102, 1); }
+}

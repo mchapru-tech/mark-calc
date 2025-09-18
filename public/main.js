@@ -1,45 +1,55 @@
 // Calculate and update totals for each category and overall
 function updateCalculations() {
-	let overallA = 0;
-	let overallB = 0;
-	const catMap = {
-		'Kids': ['kidsA', 'kidsB', 'kidsTableBody'],
-		'Sub Junior': ['subjuniorA', 'subjuniorB', 'subjuniorTableBody'],
-		'Junior': ['juniorA', 'juniorB', 'juniorTableBody'],
-		'Senior': ['seniorA', 'seniorB', 'seniorTableBody']
-	};
-	Object.entries(catMap).forEach(([cat, [aId, bId, bodyId]]) => {
-		let sumA = 0, sumB = 0;
-		const rows = document.querySelectorAll(`#${bodyId} tr`);
-		rows.forEach(row => {
-			const a = parseInt(row.querySelector('input[name="teamA"]')?.value || 0, 10);
-			const b = parseInt(row.querySelector('input[name="teamB"]')?.value || 0, 10);
-			sumA += isNaN(a) ? 0 : a;
-			sumB += isNaN(b) ? 0 : b;
-		});
-		document.getElementById(aId).textContent = sumA;
-		document.getElementById(bId).textContent = sumB;
-		overallA += sumA;
-		overallB += sumB;
-	});
-	document.getElementById('overallA').textContent = overallA;
-document.getElementById('overallB').textContent = overallB;
+    let overallA = 0;
+    let overallB = 0;
+    const catMap = {
+        'Kids': ['kidsA', 'kidsB', 'kidsTableBody'],
+        'Sub Junior': ['subjuniorA', 'subjuniorB', 'subjuniorTableBody'],
+        'Junior': ['juniorA', 'juniorB', 'juniorTableBody'],
+        'Senior': ['seniorA', 'seniorB', 'seniorTableBody']
+    };
 
-// ✅ New: Show who is leading
-const statusEl = document.getElementById('leaderStatus');
-if (statusEl) {
+    Object.entries(catMap).forEach(([cat, [aId, bId, bodyId]]) => {
+        let sumA = 0, sumB = 0;
+        const rows = document.querySelectorAll(`#${bodyId} tr`);
+        rows.forEach(row => {
+            const a = parseInt(row.querySelector('input[name="teamA"]')?.value || 0, 10);
+            const b = parseInt(row.querySelector('input[name="teamB"]')?.value || 0, 10);
+            sumA += isNaN(a) ? 0 : a;
+            sumB += isNaN(b) ? 0 : b;
+        });
+        document.getElementById(aId).textContent = sumA;
+        document.getElementById(bId).textContent = sumB;
+        overallA += sumA;
+        overallB += sumB;
+    });
+
+    // Update overall totals
+    document.getElementById('overallA').textContent = overallA;
+    document.getElementById('overallB').textContent = overallB;
+
+    // ✅ New: Show leader badge
+    const statusEl = document.getElementById('leaderStatus');
+    if (statusEl) {
+        if (overallA > overallB) {
+            statusEl.innerHTML = `<span class="leader-badge team-a-badge">🏆 Team A is leading by ${overallA - overallB} points!</span>`;
+        } else if (overallB > overallA) {
+            statusEl.innerHTML = `<span class="leader-badge team-b-badge">🏆 Team B is leading by ${overallB - overallA} points!</span>`;
+        } else {
+            statusEl.innerHTML = `<span class="leader-badge tie-badge">⚖️ It's a tie! Both have ${overallA} points.</span>`;
+        }
+    }
+
+    // ✅ New: Glow effect on leading cell
+    document.getElementById('overallA').classList.remove('leading-cell');
+    document.getElementById('overallB').classList.remove('leading-cell');
     if (overallA > overallB) {
-        statusEl.textContent = `🏆 Team A is leading by ${overallA - overallB} points!`;
-        statusEl.style.color = "#6a82fb"; // Team A color
+        document.getElementById('overallA').classList.add('leading-cell');
     } else if (overallB > overallA) {
-        statusEl.textContent = `🏆 Team B is leading by ${overallB - overallA} points!`;
-        statusEl.style.color = "#fc5c7d"; // Team B color
-    } else {
-        statusEl.textContent = `⚖️ It's a tie! Both teams have ${overallA} points.`;
-        statusEl.style.color = "#ffe066"; // Tie color
+        document.getElementById('overallB').classList.add('leading-cell');
     }
 }
-}
+
 
 document.addEventListener('DOMContentLoaded', function() {
 	setupLogin();
