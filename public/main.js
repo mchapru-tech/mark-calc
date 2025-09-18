@@ -55,6 +55,39 @@ document.addEventListener('DOMContentLoaded', function() {
 	setupLogin();
 	setupTableEvents();
 	loadTablesFromStorage();
+	// Winner announcement buttons (Admin only)
+const generateBtn = document.getElementById('generateResultBtn');
+const undoBtn = document.getElementById('undoResultBtn');
+const banner = document.getElementById('winnerBanner');
+
+if (generateBtn && undoBtn && banner) {
+    generateBtn.addEventListener('click', function() {
+        const overallA = parseInt(document.getElementById('overallA').textContent, 10);
+        const overallB = parseInt(document.getElementById('overallB').textContent, 10);
+
+        let message = '';
+        if (overallA > overallB) {
+            message = `🎉 Congratulations! <span style="color:#6a82fb;">Team A</span> Wins! 🏆`;
+        } else if (overallB > overallA) {
+            message = `🎉 Congratulations! <span style="color:#fc5c7d;">Team B</span> Wins! 🏆`;
+        } else {
+            message = `🤝 It's a Tie! Both Teams played amazingly!`;
+        }
+
+        // Broadcast winner to all
+        socket.emit('winner-announcement', { message });
+		 generateBtn.style.display = "none";
+    undoBtn.style.display = "inline-block";
+    });
+
+    undoBtn.addEventListener('click', function() {
+        // Broadcast undo to all
+        socket.emit('undo-announcement');
+		undoBtn.style.display = "none";
+    generateBtn.style.display = "inline-block";
+    });
+}
+
 	console.log('All handlers attached, page ready');
 });
 // Main client-side logic for Game Mark Calculator

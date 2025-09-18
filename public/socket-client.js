@@ -16,6 +16,44 @@ if (typeof window !== 'undefined') {
 		alert('Data updated by admin!');
 	});
 }
+// Winner announcement from admin
+// Winner announcement from admin
+socket.on('winner-announcement', (data) => {
+    const banner = document.getElementById('winnerBanner');
+    const generateBtn = document.getElementById('generateResultBtn');
+    const undoBtn = document.getElementById('undoResultBtn');
+
+    if (banner) {
+        banner.innerHTML = data.message;
+        banner.style.display = "block";
+    }
+
+    // 👇 Only toggle buttons if this is an admin
+    if (window.currentRole === "admin" && generateBtn && undoBtn) {
+        generateBtn.style.display = "none";
+        undoBtn.style.display = "inline-block";
+    }
+});
+
+// Undo announcement from admin
+socket.on('undo-announcement', () => {
+    const banner = document.getElementById('winnerBanner');
+    const generateBtn = document.getElementById('generateResultBtn');
+    const undoBtn = document.getElementById('undoResultBtn');
+
+    if (banner) {
+        banner.innerHTML = "";
+        banner.style.display = "none";
+    }
+
+    // 👇 Only toggle buttons if this is an admin
+    if (window.currentRole === "admin" && generateBtn && undoBtn) {
+        generateBtn.style.display = "inline-block";
+        undoBtn.style.display = "none";
+    }
+});
+
+
 
 // Make socket available globally for app.js
 window.socket = socket;

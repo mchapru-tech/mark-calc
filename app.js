@@ -16,21 +16,31 @@ let latestMarksData = null;
 io.on('connection', (socket) => {
     console.log('A user connected');
 
-    // When a new user connects, send them the latest data if available
     if (latestMarksData) {
         socket.emit('user-update', latestMarksData);
     }
 
-    // Listen for admin updates
+    // Existing: Admin pushes updated scores
     socket.on('admin-update', (data) => {
-        latestMarksData = data; // Save the latest data
+        latestMarksData = data;
         socket.broadcast.emit('user-update', data);
+    });
+
+    // ✅ New: Admin announces winner
+    socket.on('winner-announcement', (data) => {
+        io.emit('winner-announcement', data); // broadcast to ALL users
+    });
+
+    // ✅ New: Admin undoes result
+    socket.on('undo-announcement', () => {
+        io.emit('undo-announcement'); // broadcast to ALL users
     });
 
     socket.on('disconnect', () => {
         console.log('A user disconnected');
     });
 });
+
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
