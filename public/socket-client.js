@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 		if (typeof updateCalculations === 'function') {
 			updateCalculations();
 		}
-		alert('Data updated by admin!');
+		
 	});
 }
 // Winner announcement from admin

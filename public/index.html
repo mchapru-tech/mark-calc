@@ -31,6 +31,7 @@
             <button class="nav-btn" data-nav="Sub Junior">Sub Junior</button>
             <button class="nav-btn" data-nav="Junior">Junior</button>
             <button class="nav-btn" data-nav="Senior">Senior</button>
+            <button class="nav-btn" data-nav="General">General</button>
         </nav>
 
         <div id="leaderboard" style="margin: 1em 0; font-weight: bold;"></div>
@@ -67,6 +68,11 @@
                     <td id="seniorA">0</td>
                     <td id="seniorB">0</td>
                 </tr>
+                <tr>
+                    <td>General</td>
+                    <td id="generalA">0</td>
+                    <td id="generalB">0</td>
+                </tr>
                 <tr style="font-weight:bold;">
                     <td>Overall</td>
                     <td id="overallA" style="font-weight:bold; background:#181a20; color:#ffe066; border-top:2px solid #ffe066;">0</td>
@@ -83,8 +89,9 @@
   <th>#</th>
   <th>Item</th>
   <th>Gender</th>
-  <th>Winner</th>
-  <th>Runner</th>
+  <th>Frist</th>
+  <th>Second</th>
+  <th>Third</th>
   <th>JAISHE <br>
     JAMAL</th>
   <th>JAISHE <br>
@@ -104,8 +111,9 @@
   <th>#</th>
  <th>Item</th>
   <th>Gender</th>
-  <th>Winner</th>
-  <th>Runner</th>
+  <th>Frist</th>
+  <th>Second</th>
+  <th>Third</th>
   <th>JAISHE <br>
     JAMAL</th>
   <th>JAISHE <br>
@@ -125,8 +133,9 @@
   <th>#</th>
   <th>Item</th>
   <th>Gender</th>
-  <th>Winner</th>
-  <th>Runner</th>
+   <th>Frist</th>
+  <th>Second</th>
+  <th>Third</th>
   <th>JAISHE <br>
     JAMAL</th>
   <th>JAISHE <br>
@@ -146,8 +155,9 @@
   <th>#</th>
   <th>Item</th>
   <th>Gender</th>
-  <th>Winner</th>
-  <th>Runner</th>
+   <th>Frist</th>
+  <th>Second</th>
+  <th>Third</th>
   <th>JAISHE <br>
     JAMAL</th>
   <th>JAISHE <br>
@@ -159,6 +169,30 @@
             </table>
             <button id="addSeniorBtn" class="admin-only">Add Game</button>
         </div>
+
+        <div id="generalSection" style="display:none;">
+            <h3>General</h3>
+            <table border="1" cellpadding="5">
+                <thead>
+<tr>
+  <th>#</th>
+  <th>Item</th>
+  <th>Gender</th>
+   <th>Frist</th>
+  <th>Second</th>
+  <th>Third</th>
+  <th>JAISHE <br>
+    JAMAL</th>
+  <th>JAISHE <br>
+    JALAL</th>
+  <th class="admin-only">Remove</th>
+</tr>
+                </thead>
+                <tbody id="generalTableBody"></tbody>
+            </table>
+            <button id="addGeneralBtn" class="admin-only">Add Game</button>
+        </div>
+
        <button id="generateResultBtn" class="admin-only">🏆 Generate Result</button>
 <button id="undoResultBtn" class="admin-only" style="display:none;">↩️ Undo Result</button>
 

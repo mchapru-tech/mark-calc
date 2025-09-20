@@ -6,7 +6,8 @@ function updateCalculations() {
         'Kids': ['kidsA', 'kidsB', 'kidsTableBody'],
         'Sub Junior': ['subjuniorA', 'subjuniorB', 'subjuniorTableBody'],
         'Junior': ['juniorA', 'juniorB', 'juniorTableBody'],
-        'Senior': ['seniorA', 'seniorB', 'seniorTableBody']
+        'Senior': ['seniorA', 'seniorB', 'seniorTableBody'],
+		'General': ['generalA', 'generalB', 'generalTableBody'] // ✅ New category
     };
 
     Object.entries(catMap).forEach(([cat, [aId, bId, bodyId]]) => {
@@ -93,7 +94,7 @@ if (generateBtn && undoBtn && banner) {
 // Main client-side logic for Game Mark Calculator
 // This file contains all DOM and browser-related code
 
-const categories = ['Kids', 'Sub Junior', 'Junior', 'Senior'];
+const categories = ['Kids', 'Sub Junior', 'Junior', 'Senior', 'General']; // ✅ Added 'General' category
 let gameCount = 0;
 let currentRole = null;
 const ADMIN_PASSWORD = 'admin333'; // Change as needed
@@ -101,7 +102,8 @@ const tableIds = {
 	'Kids': 'kidsTableBody',
 	'Sub Junior': 'subjuniorTableBody',
 	'Junior': 'juniorTableBody',
-	'Senior': 'seniorTableBody'
+	'Senior': 'seniorTableBody',
+	'General': 'generalTableBody' // ✅ New category
 };
 
 function setupLogin() {
@@ -134,7 +136,8 @@ function setupUserNav() {
 		'Kids': 'kidsSection',
 		'Sub Junior': 'subjuniorSection',
 		'Junior': 'juniorSection',
-		'Senior': 'seniorSection'
+		'Senior': 'seniorSection',
+		'General': 'generalSection' // ✅ New category
 	};
 	if (!nav) return;
 	nav.querySelectorAll('.nav-btn').forEach(btn => {
@@ -210,7 +213,8 @@ function setRoleUI() {
 		'Kids': 'kidsSection',
 		'Sub Junior': 'subjuniorSection',
 		'Junior': 'juniorSection',
-		'Senior': 'seniorSection'
+		'Senior': 'seniorSection',
+		'General': 'generalSection' // ✅ New category
 	};
 
 	if (!isAdmin) {
@@ -237,6 +241,7 @@ function createGameRow(
     gender = 'Boy',
     winner1 = '',
     winner2 = '',
+	winner3 = '',
     teamA = '',
     teamB = '',
     sn = 1
@@ -253,6 +258,7 @@ function createGameRow(
         </td>
         <td><input type="text" name="winner1" value="${winner1}" placeholder="1st Winner"></td>
         <td><input type="text" name="winner2" value="${winner2}" placeholder="2nd Winner"></td>
+		<td><input type="text" name="winner3" value="${winner3}" placeholder="3rd Winner"></td>
         <td><input type="number" name="teamA" min="0" value="${teamA}" required></td>
         <td><input type="number" name="teamB" min="0" value="${teamB}" required></td>
         <td class="admin-only"><button type="button" class="removeBtn">X</button></td>
@@ -284,6 +290,7 @@ function setupTableEvents() {
     document.getElementById('addSubJuniorBtn').addEventListener('click', function() { addGameRowToCategory('Sub Junior'); });
     document.getElementById('addJuniorBtn').addEventListener('click', function() { addGameRowToCategory('Junior'); });
     document.getElementById('addSeniorBtn').addEventListener('click', function() { addGameRowToCategory('Senior'); });
+	document.getElementById('addGeneralBtn').addEventListener('click', function() { addGameRowToCategory('General'); }); // ✅ New category
     
     categories.forEach(cat => {
         const tbody = document.getElementById(tableIds[cat]);
@@ -321,10 +328,11 @@ function saveAllTablesToStorage() {
 const gender = row.querySelector('select[name="gender"]')?.value || '';
 const winner1 = row.querySelector('input[name="winner1"]')?.value || '';
 const winner2 = row.querySelector('input[name="winner2"]')?.value || '';
+const winner3 = row.querySelector('input[name="winner3"]')?.value || '';
 const teamA = row.querySelector('input[name="teamA"]')?.value || '';
 const teamB = row.querySelector('input[name="teamB"]')?.value || '';
 if (gameName || teamA || teamB) {
-    data[cat].push({ gameName, gender, winner1, winner2, teamA, teamB });
+    data[cat].push({ gameName, gender, winner1, winner2,winner3, teamA, teamB });
 }
 		});
 	});
@@ -350,6 +358,7 @@ function loadTablesFromStorage() {
             game.gender,
             game.winner1,
             game.winner2,
+			game.winner3,
             game.teamA,
             game.teamB,
         )
