@@ -267,13 +267,24 @@ td input[name="winner3"] {
    MOBILE MEDIA QUERY
 =========================== */
 @media (max-width: 480px) {
-  body, #mainSection, .container { font-size: 0.85rem; padding: 12px; }
-  table { min-width: 300px;   }
-  th, td { font-size: 0.8rem; padding: 3px 5px; max-width: 100px; }
-  input[type="text"], input[type="number"], select { font-size: 0.75rem; padding: 2px 4px; }
-  .nav-btn { padding: 8px 13.5px; font-size: 0.85rem; }
-  .add-btn { padding: 6px 16px; font-size: 0.85rem; }
+  body, #mainSection, .container { font-size: 0.9rem; padding: 10px; }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
+  }
+
+  th, td { font-size: 0.85rem; padding: 4px 6px; word-break: break-word; }
+
+  input[type="text"], input[type="number"], select { font-size: 0.85rem; padding: 4px 6px; }
+
+  .nav-btn { padding: 10px 16px; font-size: 0.9rem; }
+  .add-btn { padding: 10px 18px; font-size: 0.9rem; }
 }
+
 td input[name="gameName"] {
     font-size: 0.75rem;   /* Increase font size */
     width:100%;          /* Make it wider inside the cell */
