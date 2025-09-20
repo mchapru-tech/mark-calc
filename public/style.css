@@ -92,7 +92,8 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 900px;
+  min-height: 2000px;
   margin: 20px auto;
   background: #232946;
   padding: 24px;
@@ -267,14 +268,7 @@ td input[name="winner3"] {
 /* ===========================
    MOBILE MEDIA QUERY
 =========================== */
-@media (max-width: 480px) {
-  body, #mainSection, .container { font-size: 0.85rem; padding: 12px; }
-  table { min-width: 300px;   }
-  th, td { font-size: 0.8rem; padding: 3px 5px; max-width: 100px; }
-  input[type="text"], input[type="number"], select { font-size: 0.75rem; padding: 2px 4px; }
-  .nav-btn { padding: 8px 13.5px; font-size: 0.85rem; }
-  .add-btn { padding: 6px 16px; font-size: 0.85rem; }
-}
+
 td input[name="gameName"] {
     font-size: 0.75rem;   /* Increase font size */
     width:100%;          /* Make it wider inside the cell */
