@@ -231,15 +231,32 @@ function setRoleUI() {
 		});
 	}
 }
-function createGameRow(gameId = null, gameName = '', teamA = '', teamB = '', sn = 1) {
-	const id = gameId !== null ? gameId : `game${gameCount++}`;
-	return `<tr id="${id}">
-		<td class="game-serial"></td>
-		<td><input type="text" name="gameName" value="${gameName}" placeholder="Game name" required></td>
-		<td><input type="number" name="teamA" min="0" value="${teamA}" required></td>
-		<td><input type="number" name="teamB" min="0" value="${teamB}" required></td>
-		<td class="admin-only"><button type="button" class="removeBtn">X</button></td>
-	</tr>`;
+function createGameRow(
+    gameId = null,
+    gameName = '',
+    gender = 'Boys',
+    winner1 = '',
+    winner2 = '',
+    teamA = '',
+    teamB = '',
+    sn = 1
+) {
+    const id = gameId !== null ? gameId : `game${gameCount++}`;
+    return `<tr id="${id}">
+        <td class="game-serial"></td>
+        <td><input type="text" name="gameName" value="${gameName}" placeholder="Game name" required></td>
+        <td>
+            <select name="gender">
+                <option value="Boys" ${gender === 'Boys' ? 'selected' : ''}>Boys</option>
+                <option value="Girls" ${gender === 'Girls' ? 'selected' : ''}>Girls</option>
+            </select>
+        </td>
+        <td><input type="text" name="winner1" value="${winner1}" placeholder="1st Winner"></td>
+        <td><input type="text" name="winner2" value="${winner2}" placeholder="2nd Winner"></td>
+        <td><input type="number" name="teamA" min="0" value="${teamA}" required></td>
+        <td><input type="number" name="teamB" min="0" value="${teamB}" required></td>
+        <td class="admin-only"><button type="button" class="removeBtn">X</button></td>
+    </tr>`;
 }
 
 function addGameRowToCategory(category) {
@@ -301,11 +318,14 @@ function saveAllTablesToStorage() {
 		data[cat] = [];
 		rows.forEach(row => {
 			const gameName = row.querySelector('input[name="gameName"]')?.value || '';
-			const teamA = row.querySelector('input[name="teamA"]')?.value || '';
-			const teamB = row.querySelector('input[name="teamB"]')?.value || '';
-			if (gameName || teamA || teamB) {
-				data[cat].push({ gameName, teamA, teamB });
-			}
+const gender = row.querySelector('select[name="gender"]')?.value || '';
+const winner1 = row.querySelector('input[name="winner1"]')?.value || '';
+const winner2 = row.querySelector('input[name="winner2"]')?.value || '';
+const teamA = row.querySelector('input[name="teamA"]')?.value || '';
+const teamB = row.querySelector('input[name="teamB"]')?.value || '';
+if (gameName || teamA || teamB) {
+    data[cat].push({ gameName, gender, winner1, winner2, teamA, teamB });
+}
 		});
 	});
 	localStorage.setItem('markCalcGames', JSON.stringify(data));
@@ -322,8 +342,19 @@ function loadTablesFromStorage() {
 		const tbody = document.getElementById(tableIds[cat]);
 		tbody.innerHTML = '';
 		(data[cat] || []).forEach(game => {
-			tbody.insertAdjacentHTML('beforeend', createGameRow(null, game.gameName, game.teamA, game.teamB));
-		});
+    tbody.insertAdjacentHTML(
+        'beforeend',
+        createGameRow(
+            null,
+            game.gameName,
+            game.gender,
+            game.winner1,
+            game.winner2,
+            game.teamA,
+            game.teamB,
+        )
+    );
+});
 		updateSerialNumbers(cat);
 	});
 	updateCalculations();

@@ -1,10 +1,13 @@
+/* ===========================
+   GLOBAL STYLES
+=========================== */
 body {
   font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
   background: linear-gradient(135deg, #010e1d 0%, #7d87af 100%);
   color: #f4f4f4;
   margin: 0;
   padding: 0;
-  font-size: 1.08rem;
+  font-size: 1rem;
   letter-spacing: 0.01em;
   min-height: 100vh;
   display: flex;
@@ -13,6 +16,9 @@ body {
   justify-content: center;
 }
 
+/* ===========================
+   LOGIN SECTION
+=========================== */
 #loginSection {
   display: flex;
   flex-direction: column;
@@ -33,11 +39,15 @@ body {
   min-width: 320px;
 }
 
-#loginForm label, #loginForm select, #loginForm input, #loginForm button {
-  font-size: 1.08rem;
+#loginForm label,
+#loginForm select,
+#loginForm input,
+#loginForm button {
+  font-size: 1rem;
 }
 
-#loginForm select, #loginForm input {
+#loginForm select,
+#loginForm input {
   width: 220px;
   padding: 8px 10px;
   border-radius: 6px;
@@ -53,7 +63,7 @@ body {
   border: none;
   border-radius: 6px;
   padding: 10px 28px;
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(238,187,195,0.10);
@@ -61,128 +71,111 @@ body {
   margin-top: 10px;
 }
 
+/* ===========================
+   MAIN SECTION
+=========================== */
 .main-section-centered, #mainSection {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
-  min-height: 100vh;
-  max-width: 480px;
-  margin: 40px auto;
+  width: 100%;
+  max-width: 100vw;
+  max-height:100vh;
+  margin: 20px auto;
   background: #232946;
   border-radius: 18px;
-  box-shadow: 0 4px 32px rgba(20, 20, 40, 0.35), 0 1.5px 6px rgba(0,0,0,0.22);
-  padding: 36px 32px 32px 32px;
+  padding: 24px;
+  overflow-x: auto; 
+  overflow-y:auto ;/* horizontal scroll on small screens */
 }
 
 .container {
   max-width: 800px;
-  margin: 40px auto;
+  margin: 20px auto;
   background: #232946;
-  padding: 32px 44px 32px 44px;
+  padding: 24px;
   border-radius: 18px;
   box-shadow: 0 4px 32px rgba(20, 20, 40, 0.35), 0 1.5px 6px rgba(0,0,0,0.22);
   border: 1.5px solid #393a5a;
+  overflow-x: auto;
+  position: relative; /* crucial for dropdown positioning */
 }
 
+/* ===========================
+   TABLE STYLES
+=========================== */
 table {
-  width: 100%;
+  width: 97%;
+  
   border-collapse: separate;
   border-spacing: 0;
   margin-bottom: 24px;
+  
   background: #232946;
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(20, 20, 40, 0.18);
-  table-layout: fixed;
+  table-layout: auto;
+  
 }
 
 th, td {
   border: none;
-  padding: 14px 10px;
+  padding: 6px 9px;
   text-align: center;
-  font-size: 1.08rem;
+  font-size: 0.9rem;
   color: #f4f4f4;
   font-weight: 500;
   vertical-align: middle;
-  word-break: break-word;
+
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
 }
 
 th {
   background: linear-gradient(90deg, #393a5a 0%, #232946 100%);
   color: #ffe066;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  text-shadow: 0 1px 6px #181a20;
+  letter-spacing: 0.4px;
   border-bottom: 2px solid #ffe066;
 }
 
-tr:nth-child(even) td {
-  background: #232946;
-}
-tr:nth-child(odd) td {
-  background: #181a20;
-}
+tr:nth-child(even) td { background: #232946; }
+tr:nth-child(odd) td { background: #181a20; }
 
 input[type="number"], input[type="text"], select {
-  width: 90%;
-  padding: 7px 8px;
-  border-radius: 6px;
+  width: 100%;
+  padding: 4px 4.5px;
+  border-radius: 4px;
   border: 1.5px solid #ffe066;
-  background: #232946;
+  background: none;
   color: #f4f4f4;
-  font-size: 1.08rem;
-  transition: border 0.2s;
+  font-size: 0.80rem;
   font-weight: 500;
 }
 
-input[type="number"]:focus, input[type="text"]:focus, select:focus {
-  border: 1.5px solid #ffe066;
-  outline: none;
+select {
+  min-width: 65px;
+  font-size: 0.75rem;
 }
 
+
+
+/* Buttons */
 .add-btn {
   width: auto;
-  padding: 10px 28px;
-  margin-top: 14px;
+  padding: 8px 24px;
+  margin-top: 12px;
   background: linear-gradient(90deg, #ffe066 0%, #393a5a 100%);
   color: #232946;
   border: none;
   border-radius: 8px;
-  .main-section-centered, #mainSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 80vh;
-  }
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(238,187,195,0.10);
-  transition: background 0.2s, box-shadow 0.2s;
   float: right;
   letter-spacing: 0.5px;
-}
-#userNav {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 22px;
-  margin: 0 auto 36px auto;
-  background: #181a20;
-  border-radius: 16px;
-  box-shadow: 0 2px 16px rgba(20, 20, 40, 0.22);
-  padding: 16px 24px 14px 24px;
-  width: fit-content;
-  min-width: 340px;
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
-  left: unset;
-  transform: none;
 }
 
 .add-btn:hover, .add-btn:focus {
@@ -195,76 +188,58 @@ input[type="number"]:focus, input[type="text"]:focus, select:focus {
   color: #232946;
   border: none;
   border-radius: 6px;
-  padding: 5px 14px;
+  padding: 4px 10px;
   cursor: pointer;
-.nav-btn {
-  background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
-  color: #232946;
-  border: none;
-  border-radius: 22px;
-  padding: 12px 32px;
-  font-size: 1.13rem;
-  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(238,187,195,0.13);
-  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
-  margin: 0 10px;
-  letter-spacing: 0.7px;
-  outline: none;
-}
-.nav-btn.active, .nav-btn:focus, .nav-btn:hover {
-  background: linear-gradient(90deg, #ffe066 0%, #eebbc3 100%);
-  color: #232946;
-  box-shadow: 0 4px 16px rgba(238,187,195,0.18);
-  border: 2px solid #ffe066;
-}
-  font-size: 1.08rem;
-  font-weight: 700;
-  box-shadow: 0 1px 4px rgba(238,187,195,0.10);
-  transition: background 0.2s;
 }
 
 .removeBtn:hover, .removeBtn:focus {
   background: linear-gradient(90deg, #393a5a 0%, #ffe066 100%);
 }
 
+.nav-btn {
+  background: linear-gradient(90deg, #6a82fb 0%, #fc5c7d 100%);
+  color: #232946;
+  border: none;
+  border-radius: 22px;
+  padding: 10px 14.5px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(238,187,195,0.13);
+  transition: all 0.2s;
+  letter-spacing: 0.7px;
+}
+
+.nav-btn.active, .nav-btn:focus, .nav-btn:hover {
+  background: linear-gradient(90deg, #ffe066 0%, #eebbc3 100%);
+  color: #232946;
+  box-shadow: 0 4px 16px rgba(238,187,195,0.18);
+  border: 2px solid #ffe066;
+}
+
+/* Leaderboard & badges */
 .leaderboard {
-  margin: 30px 0 10px 0;
+  margin: 20px 0 10px 0;
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: #ffe066;
   letter-spacing: 0.5px;
   background: #232946;
   border-radius: 10px;
-  padding: 14px 0;
+  padding: 10px 0;
   box-shadow: 0 2px 8px rgba(238,187,195,0.10);
   border: 1.5px solid #393a5a;
 }
 
-/* Totals row styling */
-#categoryTable tr[style*="font-weight:bold"] td {
-  background: #181a20 !important;
-  color: #ffe066 !important;
-  font-size: 1.13rem;
-  font-weight: 800;
-  border-top: 2.5px solid #ffe066;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(255,224,102,0.08);
-}
-
-@media (max-width: 900px) {
-  .container { padding: 10px; }
-}
 .leader-badge {
   display: inline-block;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 20px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 .team-a-badge { background: #6a82fb; color: white; }
@@ -274,7 +249,37 @@ input[type="number"]:focus, input[type="text"]:focus, select:focus {
 .leading-cell {
   animation: glow 1.5s infinite alternate;
 }
+
 @keyframes glow {
   from { box-shadow: 0 0 8px rgba(255, 224, 102, 0.6); }
   to   { box-shadow: 0 0 18px rgba(255, 224, 102, 1); }
+}
+
+/* Winner input widths */
+td input[name="winner1"],
+td input[name="winner2"] {
+  width: 95%;
+}
+
+/* ===========================
+   MOBILE MEDIA QUERY
+=========================== */
+@media (max-width: 480px) {
+  body, #mainSection, .container { font-size: 0.85rem; padding: 12px; }
+  table { min-width: 600px; }
+  th, td { font-size: 0.8rem; padding: 3px 5px; max-width: 100px; }
+  input[type="text"], input[type="number"], select { font-size: 0.75rem; padding: 2px 4px; }
+  .nav-btn { padding: 8px 16px; font-size: 0.85rem; }
+  .add-btn { padding: 6px 16px; font-size: 0.85rem; }
+}
+td input[name="gameName"] {
+    font-size: 0.75rem;   /* Increase font size */
+    width:100%;          /* Make it wider inside the cell */
+    padding: 4px 9px 0px 4px;    /* Optional: adjust padding */
+    box-sizing: border-box; /* Ensures padding does not break layout */
+}
+table th:nth-child(2),
+table td:nth-child(2) {
+    min-width: 140px;        /* Adjust width as needed */
+    max-width: 300px;        /* Prevent it from getting too big */
 }
