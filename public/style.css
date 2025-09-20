@@ -267,7 +267,7 @@ td input[name="winner2"] {
 =========================== */
 @media (max-width: 480px) {
   body, #mainSection, .container { font-size: 0.85rem; padding: 12px; }
-  table { min-width: 100vw; min-height:100vh ; }
+  table { min-width: 400px;   }
   th, td { font-size: 0.8rem; padding: 3px 5px; max-width: 100px; }
   input[type="text"], input[type="number"], select { font-size: 0.75rem; padding: 2px 4px; }
   .nav-btn { padding: 8px 16px; font-size: 0.85rem; }

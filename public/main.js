@@ -234,7 +234,7 @@ function setRoleUI() {
 function createGameRow(
     gameId = null,
     gameName = '',
-    gender = 'Boys',
+    gender = 'Boy',
     winner1 = '',
     winner2 = '',
     teamA = '',
@@ -247,8 +247,8 @@ function createGameRow(
         <td><input type="text" name="gameName" value="${gameName}" placeholder="Game name" required></td>
         <td>
             <select name="gender">
-                <option value="Boys" ${gender === 'Boys' ? 'selected' : ''}>Boys</option>
-                <option value="Girls" ${gender === 'Girls' ? 'selected' : ''}>Girls</option>
+                <option value="Boy" ${gender === 'Boy' ? 'selected' : ''}>Boy</option>
+                <option value="Girl" ${gender === 'Girl' ? 'selected' : ''}>Girl</option>
             </select>
         </td>
         <td><input type="text" name="winner1" value="${winner1}" placeholder="1st Winner"></td>
