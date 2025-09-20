@@ -87,8 +87,7 @@ body {
   background: #232946;
   border-radius: 18px;
   padding: 20px;
-  overflow-x: auto; 
-  overflow-y:auto ;/* horizontal scroll on small screens */
+ 
 }
 
 .container {
