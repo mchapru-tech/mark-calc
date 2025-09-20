@@ -1,6 +1,6 @@
 body {
   font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
-  background: linear-gradient(135deg, #181a20 0%, #232946 100%);
+  background: linear-gradient(135deg, #010e1d 0%, #7d87af 100%);
   color: #f4f4f4;
   margin: 0;
   padding: 0;
@@ -22,7 +22,7 @@ body {
 }
 
 #loginForm {
-  background: #232946;
+  background: #02142c;
   border-radius: 14px;
   box-shadow: 0 4px 24px rgba(20, 20, 40, 0.22);
   padding: 36px 38px 28px 38px;

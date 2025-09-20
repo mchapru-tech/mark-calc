@@ -32,9 +32,9 @@ function updateCalculations() {
     const statusEl = document.getElementById('leaderStatus');
     if (statusEl) {
         if (overallA > overallB) {
-            statusEl.innerHTML = `<span class="leader-badge team-a-badge">🏆 Team A is leading by ${overallA - overallB} points!</span>`;
+            statusEl.innerHTML = `<span class="leader-badge team-a-badge">🏆 JAISHE JAMAL is leading by ${overallA - overallB} points!</span>`;
         } else if (overallB > overallA) {
-            statusEl.innerHTML = `<span class="leader-badge team-b-badge">🏆 Team B is leading by ${overallB - overallA} points!</span>`;
+            statusEl.innerHTML = `<span class="leader-badge team-b-badge">🏆 JAISHE JALAL is leading by ${overallB - overallA} points!</span>`;
         } else {
             statusEl.innerHTML = `<span class="leader-badge tie-badge">⚖️ It's a tie! Both have ${overallA} points.</span>`;
         }
@@ -67,9 +67,9 @@ if (generateBtn && undoBtn && banner) {
 
         let message = '';
         if (overallA > overallB) {
-            message = `🎉 Congratulations! <span style="color:#6a82fb;">Team A</span> Wins! 🏆`;
+            message = `🎉 Congratulations! <span style="color:#6a82fb;">JAISHE JAMAL</span> Wins! 🏆`;
         } else if (overallB > overallA) {
-            message = `🎉 Congratulations! <span style="color:#fc5c7d;">Team B</span> Wins! 🏆`;
+            message = `🎉 Congratulations! <span style="color:#fc5c7d;">JAISHE JALAL</span> Wins! 🏆`;
         } else {
             message = `🤝 It's a Tie! Both Teams played amazingly!`;
         }
@@ -165,7 +165,7 @@ function setupUserNav() {
 							const banner = document.createElement('div');
 							banner.className = 'category-total-banner';
 							banner.style = 'margin-bottom:12px;padding:10px 0;font-size:1.13rem;font-weight:600;background:#232946;color:#ffe066;border-radius:10px;text-align:center;';
-							banner.innerHTML = `${cat} Total — Team A: <span style="color:#6a82fb;">${aVal}</span> &nbsp; Team B: <span style="color:#fc5c7d;">${bVal}</span>`;
+							banner.innerHTML = `${cat} Total — JAISHE JAMAL: <span style="color:#6a82fb;">${aVal}</span> &nbsp; JAISHE JALAL: <span style="color:#fc5c7d;">${bVal}</span>`;
 							el.insertAdjacentElement('afterbegin', banner);
 						}
 					}
